@@ -6,7 +6,7 @@ export interface User {
  email: string; // unique
  password: string; // hash
  username: string; // nonunique
-};
+}
 
 // Budget
 export interface Budget {

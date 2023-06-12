@@ -13,5 +13,5 @@ app.use("/", express.static("src/client"));
 
 const PORT = 8081;
 app.listen(PORT, () => {
-  console.log(colors.green(`\n${new Date()}\nServer started at ${PORT}...`));
+	console.log(colors.green(`\n${new Date()}\nServer started at ${PORT}...`));
 });
