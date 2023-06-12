@@ -5,50 +5,53 @@ import { Receipt } from "../domain/model";
 import { uuid } from "../utils/uuid";
 
 const _getReceiptsByUser = (userId: string) => {
-	return receipts.filter(({ user_id }) => user_id === userId);
+  return receipts.filter(({ user_id }) => user_id === userId);
 };
 
 const getUserReceipts = (userId: string, page: number, limit: number) => {
-	const userReceipts = _getReceiptsByUser(userId);
+  const userReceipts = _getReceiptsByUser(userId);
 
-	const start = (page - 1) * limit;
-	const end = page * limit;
-	const paginatedReceipts = userReceipts.slice(start, end);
+  const start = (page - 1) * limit;
+  const end = page * limit;
+  const paginatedReceipts = userReceipts.slice(start, end);
 
-	return paginatedReceipts;
+  return paginatedReceipts;
 };
 
 const getProductsByReceipt = (receiptId: string) => {
-	return products.filter(({ receipt_id }) => receipt_id === receiptId);
+  return products.filter(({ receipt_id }) => receipt_id === receiptId);
 };
 
-const addReceiptWithProducts = (userId: string, date: Date, productsData: ProductPayload[]) => {
-	// TRANSACTION: Receipt -> Products.
-  
-	// ORM will handle id
-	const receipt: Receipt = {
-		id: uuid(),
-		user_id: userId,
-		date,
-	};
-  
-	receipts.push(receipt);
-	// if fails then rollback all stuff and cancel future.
+const addReceiptWithProducts = (
+  userId: string,
+  date: Date,
+  productsData: ProductPayload[]
+) => {
+  // TRANSACTION: Receipt -> Products.
 
-	const ormedProducts = productsData.map(product => ({
-		...product,
-		id: uuid(),
-		receipt_id: receipt.id,
-	}));
+  // ORM will handle id
+  const receipt: Receipt = {
+    id: uuid(),
+    user_id: userId,
+    date,
+  };
+  receipts.push(receipt);
+  // if fails then rollback all stuff and cancel future.
 
-	products.push(...ormedProducts);
+  const ormedProducts = productsData.map((product) => ({
+    ...product,
+    id: uuid(),
+    receipt_id: receipt.id,
+  }));
 
-	return receipt;
+  products.push(...ormedProducts);
+
+  return receipt;
 };
 
 export const TransactionRepository = {
-	getUserReceipts,
-	getProductsByReceipt,
+  getUserReceipts,
+  getProductsByReceipt,
 
-	addReceiptWithProducts,
+  addReceiptWithProducts,
 };
