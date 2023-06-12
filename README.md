@@ -1,6 +1,6 @@
 # Pocket Assistant
 
-**Manage your home budget with ease**
+**Manage your home budget with ease** 🍃
 
 Features:
 
