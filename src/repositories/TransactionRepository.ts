@@ -22,24 +22,27 @@ const getProductsByReceipt = (receiptId: string) => {
   return products.filter(({ receipt_id }) => receipt_id === receiptId);
 };
 
-const addReceiptWithProducts = (userId: string, date: Date, productsData: ProductPayload[]) => {
+const addReceiptWithProducts = (
+  userId: string,
+  date: Date,
+  productsData: ProductPayload[]
+) => {
   // TRANSACTION: Receipt -> Products.
-  
+
   // ORM will handle id
   const receipt: Receipt = {
     id: uuid(),
     user_id: userId,
     date,
   };
-  
   receipts.push(receipt);
   // if fails then rollback all stuff and cancel future.
 
-  const ormedProducts = productsData.map(product => ({
+  const ormedProducts = productsData.map((product) => ({
     ...product,
     id: uuid(),
     receipt_id: receipt.id,
-  }))
+  }));
 
   products.push(...ormedProducts);
 

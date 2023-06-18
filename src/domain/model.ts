@@ -2,17 +2,17 @@ type UUID = string;
 
 // Auth
 export interface User {
- id: UUID; // some uuid
- email: string; // unique
- password: string; // hash
- username: string; // nonunique
-};
+  id: UUID; // some uuid
+  email: string; // unique
+  password: string; // hash
+  username: string; // nonunique
+}
 
 // Budget
 export interface Budget {
   id: UUID; // some uuid
   user_id: UUID;
-  date: Date
+  date: Date;
   limit: number;
   // spent: number;
 }

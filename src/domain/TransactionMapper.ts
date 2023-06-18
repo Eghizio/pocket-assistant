@@ -14,7 +14,11 @@ interface ReceiptDto {
 
 const toReceiptDto = ({ id, date }: Receipt): ReceiptDto => ({ id, date });
 
-const toProductDto = ({ id, name, price }: Product): ProductDto => ({ id, name, price });
+const toProductDto = ({ id, name, price }: Product): ProductDto => ({
+  id,
+  name,
+  price,
+});
 
 export const TransactionMapper = {
   toReceiptDto,

@@ -25,6 +25,3 @@ export const ReceiptQuerySchema = z.object({
   year: z.coerce.number(),
   month: z.coerce.number(),
 });
-
-
-

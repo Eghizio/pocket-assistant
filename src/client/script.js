@@ -1,14 +1,17 @@
-
 const Url = {
-  receipts: () => `/api/transactions/receipts`,
+  receipts: () => "/api/transactions/receipts",
   products: (receiptId) => `/api/transactions/receipts/${receiptId}`,
 };
 
-const getReceipts = () => fetch(Url.receipts())
-  .then(res => res.json()).catch(console.error);
+const getReceipts = () =>
+  fetch(Url.receipts())
+    .then((res) => res.json())
+    .catch(console.error);
 
-const getProducts = (receiptId) => fetch(Url.products(receiptId))
-  .then(res => res.json()).catch(console.error);
+const getProducts = (receiptId) =>
+  fetch(Url.products(receiptId))
+    .then((res) => res.json())
+    .catch(console.error);
 
 const createProducts = (products) => {
   return products.map(({ id, name, price }) => {
