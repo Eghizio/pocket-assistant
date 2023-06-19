@@ -27,6 +27,9 @@ RUN npm install --production=false
 # Copy application code
 COPY --link . .
 
+COPY --link tsconfig.json .
+RUN npm run build
+
 # Remove development dependencies
 RUN npm prune --production
 
