@@ -4,6 +4,8 @@
     "build": "tsc",
     "dev": "nodemon src/index.ts",
     "lint": "eslint ./ --fix",
+    "docker:build": "docker build . -t pocket-assistant",
+    "docker:run": "docker run -dp 8080:8080 pocket-assistant",
     "fly:deploy": "flyctl deploy"
   },
   "devDependencies": {
