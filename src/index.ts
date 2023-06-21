@@ -11,7 +11,7 @@ app.use(morgan("dev"));
 app.use("/api", api);
 app.use("/", express.static("src/client"));
 
-const PORT = 8081;
+const PORT = process.env.PORT || "8080";
 app.listen(PORT, () => {
   console.log(colors.green(`\n${new Date()}\nServer started at ${PORT}...`));
 });
